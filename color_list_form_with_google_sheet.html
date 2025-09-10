@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Color List</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+
+    <div class="max-w-4xl mx-auto bg-white p-6 sm:p-10 rounded-xl shadow-lg">
+        <h1 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-2 text-center">Project Color List</h1>
+        <p class="text-gray-500 mb-8 text-center">Please provide the details for your painting project.</p>
+
+        <!-- The form will be submitted using JavaScript to a Google Apps Script web app -->
+        <form id="onboardingForm">
+            <!-- Client Information Section -->
+            <div class="mb-8 p-6 bg-gray-50 rounded-lg">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-4">Client Information</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="firstName" class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+                        <input type="text" id="firstName" name="firstName" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out" required>
+                    </div>
+                    <div>
+                        <label for="lastName" class="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
+                        <input type="text" id="lastName" name="lastName" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out" required>
+                    </div>
+                    <div>
+                        <label for="clientEmail" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                        <input type="email" id="clientEmail" name="clientEmail" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out" required>
+                    </div>
+                    <div>
+                        <label for="phoneNumber" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                        <input type="tel" id="phoneNumber" name="phoneNumber" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out" required>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label for="street" class="block text-sm font-medium text-gray-700 mb-1">Street Address</label>
+                        <input type="text" id="street" name="street" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out" required>
+                    </div>
+                    <div>
+                        <label for="city" class="block text-sm font-medium text-gray-700 mb-1">City</label>
+                        <input type="text" id="city" name="city" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out" required>
+                    </div>
+                    <div>
+                        <label for="state" class="block text-sm font-medium text-gray-700 mb-1">State</label>
+                        <input type="text" id="state" name="state" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out" required>
+                    </div>
+                    <div class="md:col-span-2">
+                        <label for="zipCode" class="block text-sm font-medium text-gray-700 mb-1">Zip Code</label>
+                        <input type="text" id="zipCode" name="zipCode" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Details Section -->
+            <div class="mb-8 p-6 bg-gray-50 rounded-lg">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-4">Project Details</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="jobId" class="block text-sm font-medium text-gray-700 mb-1">Job ID</label>
+                        <input type="text" id="jobId" name="jobId" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out" required>
+                    </div>
+                    <div>
+                        <label for="estimateLink" class="block text-sm font-medium text-gray-700 mb-1">Estimate Link</label>
+                        <input type="url" id="estimateLink" name="estimateLink" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label for="workOrderLink" class="block text-sm font-medium text-gray-700 mb-1">Work Order Link</label>
+                        <input type="url" id="workOrderLink" name="workOrderLink" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Type Section -->
+            <div class="mb-8 p-6 bg-gray-50 rounded-lg">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-4">Project Type</h2>
+                <p class="text-gray-600 mb-4">Select the type of project to begin.</p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-8">
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="projectType" value="interior" class="form-radio text-blue-600 h-5 w-5">
+                        <span class="ml-2 text-gray-700">Interior</span>
+                    </label>
+                    <label class="inline-flex items-center">
+                        <input type="radio" name="projectType" value="exterior" class="form-radio text-blue-600 h-5 w-5">
+                        <span class="ml-2 text-gray-700">Exterior</span>
+                    </label>
+                </div>
+            </div>
+
+            <div id="dynamic-content-container" class="hidden">
+                <!-- Project Color Palette Section -->
+                <div class="mb-8 p-6 bg-gray-50 rounded-lg">
+                    <h2 class="text-2xl font-semibold text-gray-700 mb-4 flex justify-between items-center">
+                        Project Color Palette
+                        <button type="button" id="add-color-btn" class="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition duration-150 ease-in-out shadow-md">+ Add Color</button>
+                    </h2>
+                    <div id="color-palette-container">
+                        <!-- Dynamic color entries will be added here -->
+                    </div>
+                </div>
+                
+                <!-- Dynamic Project Details Sections -->
+                <div id="project-details">
+                    <!-- Dynamic interior or exterior sections will be added here by JavaScript -->
+                </div>
+
+                <!-- Buttons to add new sections -->
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mt-8">
+                    <button type="button" id="addAssignmentGroupBtn" class="w-full sm:w-auto px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out shadow-md hidden">
+                        + Add Interior Assignment Group
+                    </button>
+                    <button type="button" id="addExteriorSectionBtn" class="w-full sm:w-auto px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out shadow-md hidden">
+                        + Add Exterior Area
+                    </button>
+                </div>
+            </div>
+
+            <!-- Notes and Comments Section -->
+            <div class="mb-8 p-6 bg-gray-50 rounded-lg">
+                <h2 class="text-2xl font-semibold text-gray-700 mb-4">Notes and Comments</h2>
+                <label for="notes" class="block text-sm font-medium text-gray-700 mb-1">Add any additional notes here.</label>
+                <textarea id="notes" name="notes" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out"></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="mt-10 text-center">
+                <button type="submit" class="w-full sm:w-1/2 px-8 py-4 bg-green-600 text-white font-bold text-lg rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-150 ease-in-out shadow-lg">
+                    Submit Project Details
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- NEW: Function to pre-fill form fields from URL query parameters ---
+            function prefillFormFromURL() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const mapping = {
+                    'firstName': 'firstName',
+                    'lastName': 'lastName',
+                    'clientEmail': 'clientEmail',
+                    'phoneNumber': 'phoneNumber',
+                    'street': 'street',
+                    'city': 'city',
+                    'state': 'state',
+                    'zipCode': 'zipCode'
+                };
+
+                for (const param of urlParams.entries()) {
+                    const [key, value] = param;
+                    const elementId = mapping[key];
+                    if (elementId) {
+                        const inputElement = document.getElementById(elementId);
+                        if (inputElement) {
+                            inputElement.value = decodeURIComponent(value);
+                        }
+                    }
+                }
+            }
+
+            // --- END NEW FUNCTION ---
+
+            const form = document.getElementById('onboardingForm');
+            const projectDetailsContainer = document.getElementById('project-details');
+            const colorPaletteContainer = document.getElementById('color-palette-container');
+            const addAssignmentGroupBtn = document.getElementById('addAssignmentGroupBtn');
+            const addExteriorSectionBtn = document.getElementById('addExteriorSectionBtn');
+            const addColorBtn = document.getElementById('add-color-btn');
+            const projectTypeRadios = document.querySelectorAll('input[name="projectType"]');
+            const dynamicContentContainer = document.getElementById('dynamic-content-container');
+            
+            let colorIdCounter = 0;
+
+            // --- IMPORTANT: REPLACE WITH YOUR GOOGLE APPS SCRIPT WEB APP URL ---
+            const GOOGLE_APPS_SCRIPT_URL = "YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
+
+            // --- DATA LISTS ---
+            const interiorRooms = [
+                'Attic', 'Basement', 'Bathroom', 'Bedroom', 'Den', 'Dining Room', 'Entry', 'Family Room',
+                'Foyer', 'Garage', 'Hallway', 'Kitchen', 'Laundry Room', 
+                'Living Room', 'Office', 'Playroom', 'Pantry', 'Sunroom'
+            ].sort();
+            
+            // Add 'Other' to the end of the sorted list
+            interiorRooms.push('Other');
+
+            const manufacturers = [
+                'Benjamin Moore', 'Sherwin Williams', 'Behr', 'Valspar', 'PPG'
+            ].sort();
+            manufacturers.push('Other');
+
+            const exteriorAreas = [
+                'Deck', 'Doors', 'Fence', 'Garage', 'Siding', 'Shutters', 'Trim', 'Porch', 'Patio'
+            ].sort();
+            exteriorAreas.push('Other');
+
+
+            // --- FUNCTIONS FOR DYNAMIC ELEMENTS ---
+            
+            // Function to update the color dropdowns in all room sections
+            const updateColorDropdowns = () => {
+                const colorOptions = Array.from(colorPaletteContainer.querySelectorAll('.color-entry-field'))
+                    .map(input => {
+                        const colorId = input.dataset.colorId;
+                        const colorName = input.value || 'New Color';
+                        return `<option value="${colorId}">${colorName}</option>`;
+                    })
+                    .join('');
+
+                document.querySelectorAll('.color-select').forEach(select => {
+                    const currentValue = select.value;
+                    select.innerHTML = `<option value="">Select a color...</option>${colorOptions}`;
+                    if (currentValue) {
+                        select.value = currentValue;
+                    }
+                });
+            };
+
+            // Function to create a new color entry in the palette
+            const createColorPaletteEntry = () => {
+                colorIdCounter++;
+                const colorId = `color-${colorIdCounter}`;
+                const entryHtml = `
+                    <div id="${colorId}" class="flex flex-col sm:flex-row items-start sm:items-center space-y-2 sm:space-y-0 sm:space-x-4 p-4 border border-gray-200 rounded-lg mb-4">
+                        <input type="text" data-color-id="${colorId}" name="colorName-${colorId}" placeholder="Color Name (e.g., 'White')" class="color-entry-field w-full sm:w-1/3 px-3 py-2 border border-gray-300 rounded-lg">
+                        <input type="text" name="colorNumber-${colorId}" placeholder="Color Number" class="w-full sm:w-1/3 px-3 py-2 border border-gray-300 rounded-lg">
+                        
+                        <div class="w-full sm:w-1/3">
+                            <select name="colorManufacturer-${colorId}" class="color-manufacturer-select w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out">
+                                <option value="">Select Manufacturer...</option>
+                                ${manufacturers.map(mfg => `<option value="${mfg}">${mfg}</option>`).join('')}
+                            </select>
+                            <div class="other-manufacturer-field mt-2 hidden">
+                                <input type="text" name="otherManufacturer-${colorId}" placeholder="Specify Other Manufacturer" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500">
+                            </div>
+                        </div>
+
+                        <button type="button" class="remove-color-btn text-red-500 hover:text-red-700 transition duration-150 ease-in-out text-sm">Remove</button>
+                    </div>
+                `;
+                colorPaletteContainer.insertAdjacentHTML('beforeend', entryHtml);
+                updateColorDropdowns(); // Update all dropdowns when a new color is added
+            };
+
+            // Function to create a new interior assignment group
+            const createInteriorAssignmentGroup = () => {
+                const areasToPaint = ['Accent Wall', 'Baseboard', 'Ceilings', 'Chair Molding', 'Doors', 'Door Trim', 'Crown Molding', 'Walls', 'Window Trim'];
+                areasToPaint.sort();
+                areasToPaint.push('Other');
+
+                const groupHtml = `
+                    <div class="assignment-group mb-8 p-6 bg-gray-100 rounded-lg shadow-inner border border-gray-200">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-semibold text-gray-800">Interior Color Assignment</h3>
+                            <button type="button" class="remove-group-btn text-red-500 hover:text-red-700 transition duration-150 ease-in-out text-sm">Remove</button>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Select Rooms</label>
+                                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+                                    ${interiorRooms.map(room => `
+                                        <label class="inline-flex items-center">
+                                            <input type="checkbox" class="room-checkbox form-checkbox text-blue-600 h-5 w-5" value="${room}" 
+                                                ${room === 'Bathroom' ? 'id="bathroom-checkbox"' : ''}
+                                                ${room === 'Bedroom' ? 'id="bedroom-checkbox"' : ''}
+                                                ${room === 'Hallway' ? 'id="hallway-checkbox"' : ''}
+                                                ${room === 'Other' ? 'id="other-room-checkbox"' : ''}
+                                            >
+                                            <span class="ml-2 text-gray-700">${room}</span>
+                                        </label>
+                                    `).join('')}
+                                </div>
+                                <div class="mt-4 hidden" id="bathroom-section">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Specify Bathroom(s)</label>
+                                    <div id="bathroom-inputs-container">
+                                        <!-- Initial bathroom input will be added here -->
+                                    </div>
+                                    <button type="button" id="add-bathroom-btn" class="mt-2 px-4 py-2 text-sm bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-150 ease-in-out">
+                                        + Add Another Bathroom
+                                    </button>
+                                </div>
+                                <div class="mt-4 hidden" id="bedroom-section">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Specify Bedroom(s)</label>
+                                    <div id="bedroom-inputs-container">
+                                        <!-- Initial bedroom input will be added here -->
+                                    </div>
+                                    <button type="button" id="add-bedroom-btn" class="mt-2 px-4 py-2 text-sm bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-150 ease-in-out">
+                                        + Add Another Bedroom
+                                    </button>
+                                </div>
+                                <div class="mt-4 hidden" id="hallway-section">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Specify Hallway(s)</label>
+                                    <div id="hallway-inputs-container">
+                                        <!-- Initial hallway input will be added here -->
+                                    </div>
+                                    <button type="button" id="add-hallway-btn" class="mt-2 px-4 py-2 text-sm bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-150 ease-in-out">
+                                        + Add Another Hallway
+                                    </button>
+                                </div>
+                                <div class="mt-4 hidden" id="other-room-section">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Specify Other Room(s)</label>
+                                    <div id="other-room-inputs-container">
+                                        <!-- Initial other room input will be added here -->
+                                    </div>
+                                    <button type="button" id="add-other-room-btn" class="mt-2 px-4 py-2 text-sm bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-150 ease-in-out">
+                                        + Add Another Room
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Select Color</label>
+                                <select class="color-select w-full px-4 py-2 border border-gray-300 rounded-lg" required>
+                                    <option value="">Select a color...</option>
+                                </select>
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Areas to be Painted with this color</label>
+                                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                                    ${areasToPaint.map(area => `
+                                        <label class="inline-flex items-center">
+                                            <input type="checkbox" class="area-checkbox form-checkbox text-blue-600 h-5 w-5 ${area.toLowerCase().replace(/\s/g, '')}-checkbox" value="${area.toLowerCase().replace(/\s/g, '')}">
+                                            <span class="ml-2 text-gray-700">${area}</span>
+                                        </label>
+                                    `).join('')}
+                                </div>
+                                <div class="mt-4 hidden accent-wall-section">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Specify Accent Wall(s)</label>
+                                    <div class="accent-wall-inputs-container"></div>
+                                    <button type="button" class="mt-2 px-4 py-2 text-sm bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-150 ease-in-out add-accent-wall-btn">
+                                        + Add Another Accent Wall
+                                    </button>
+                                </div>
+                                <div class="mt-4 hidden other-section">
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Specify Other Area(s)</label>
+                                    <div class="other-inputs-container"></div>
+                                    <button type="button" class="mt-2 px-4 py-2 text-sm bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-150 ease-in-out add-other-btn">
+                                        + Add Another Item
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                projectDetailsContainer.insertAdjacentHTML('beforeend', groupHtml);
+                updateColorDropdowns();
+            };
+
+            // Function to create a new exterior area section
+            const createExteriorSection = () => {
+                const areasToPaint = ['Deck', 'Doors', 'Fence', 'Garage', 'Siding', 'Shutters', 'Trim', 'Porch', 'Patio'];
+                areasToPaint.sort();
+                areasToPaint.push('Other');
+
+                const id = `exterior-${Date.now()}`;
+                const sectionHtml = `
+                    <div id="${id}" class="mb-8 p-6 bg-gray-100 rounded-lg shadow-inner border border-gray-200">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-semibold text-gray-800">Exterior Area</h3>
+                            <button type="button" class="remove-section-btn text-red-500 hover:text-red-700 transition duration-150 ease-in-out text-sm">Remove</button>
+                        </div>
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Area Name (e.g., "Siding", "Deck")</label>
+                            <input type="text" name="areaName" class="w-full px-4 py-2 border border-gray-300 rounded-lg" placeholder="e.g., Siding" required>
+                        </div>
+                        <div class="color-assignments-container">
+                            <div class="color-assignment-block border border-dashed border-gray-400 rounded-lg p-4 mb-4">
+                                <div class="flex justify-between items-center mb-4">
+                                    <h4 class="text-md font-semibold text-gray-700">Color Assignment</h4>
+                                    <button type="button" class="remove-assignment-btn text-red-500 hover:text-red-700 transition duration-150 ease-in-out text-sm">Remove</button>
+                                </div>
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Select Color</label>
+                                    <select class="color-select w-full px-4 py-2 border border-gray-300 rounded-lg" required>
+                                        <option value="">Select a color...</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Areas to be Painted with this color</label>
+                                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                                        ${areasToPaint.map(area => `
+                                            <label class="inline-flex items-center">
+                                                <input type="checkbox" class="area-checkbox form-checkbox text-blue-600 h-5 w-5 ${area.toLowerCase().replace(/\s/g, '')}-checkbox" value="${area.toLowerCase().replace(/\s/g, '')}">
+                                                <span class="ml-2 text-gray-700">${area}</span>
+                                            </label>
+                                        `).join('')}
+                                    </div>
+                                    <div class="mt-4 hidden other-section">
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Specify Other Area(s)</label>
+                                        <div class="other-inputs-container"></div>
+                                        <button type="button" class="mt-2 px-4 py-2 text-sm bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-150 ease-in-out add-other-btn">
+                                            + Add Another Item
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                projectDetailsContainer.insertAdjacentHTML('beforeend', sectionHtml);
+                updateColorDropdowns();
+            };
+            
+            // Function to add a single bathroom input field
+            const addBathroomInput = (container) => {
+                const inputHtml = `
+                    <div class="bathroom-input-group flex items-center mb-2 space-x-2">
+                        <input type="text" class="bathroom-name w-full px-3 py-2 border border-gray-300 rounded-lg" placeholder="e.g., Master Bathroom" required>
+                        <button type="button" class="remove-input-btn text-red-500 hover:text-red-700 transition duration-150 ease-in-out text-sm">Remove</button>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', inputHtml);
+            };
+
+            // Function to add a single bedroom input field
+            const addBedroomInput = (container) => {
+                const inputHtml = `
+                    <div class="bedroom-input-group flex items-center mb-2 space-x-2">
+                        <input type="text" class="bedroom-name w-full px-3 py-2 border border-gray-300 rounded-lg" placeholder="e.g., Master Bedroom" required>
+                        <button type="button" class="remove-input-btn text-red-500 hover:text-red-700 transition duration-150 ease-in-out text-sm">Remove</button>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', inputHtml);
+            };
+
+            // Function to add a single hallway input field
+            const addHallwayInput = (container) => {
+                const inputHtml = `
+                    <div class="hallway-input-group flex items-center mb-2 space-x-2">
+                        <input type="text" class="hallway-name w-full px-3 py-2 border border-gray-300 rounded-lg" placeholder="e.g., Upstairs Hallway" required>
+                        <button type="button" class="remove-input-btn text-red-500 hover:text-red-700 transition duration-150 ease-in-out text-sm">Remove</button>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', inputHtml);
+            };
+            
+            // Function to add a single other room input field
+            const addOtherRoomInput = (container) => {
+                const inputHtml = `
+                    <div class="other-room-input-group flex items-center mb-2 space-x-2">
+                        <input type="text" class="other-room-name w-full px-3 py-2 border border-gray-300 rounded-lg" placeholder="e.g., Media Room" required>
+                        <button type="button" class="remove-input-btn text-red-500 hover:text-red-700 transition duration-150 ease-in-out text-sm">Remove</button>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', inputHtml);
+            };
+            
+            // Function to add a single accent wall input field
+            const addAccentWallInput = (container) => {
+                const inputHtml = `
+                    <div class="accent-wall-input-group flex items-center mb-2 space-x-2">
+                        <input type="text" class="accent-wall-name w-full px-3 py-2 border border-gray-300 rounded-lg" placeholder="e.g., Living Room - North Wall" required>
+                        <button type="button" class="remove-input-btn text-red-500 hover:text-red-700 transition duration-150 ease-in-out text-sm">Remove</button>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', inputHtml);
+            };
+            
+            // Function to add a single other input field
+            const addOtherInput = (container) => {
+                const inputHtml = `
+                    <div class="other-input-group flex items-center mb-2 space-x-2">
+                        <input type="text" class="other-name w-full px-3 py-2 border border-gray-300 rounded-lg" placeholder="Specify item" required>
+                        <button type="button" class="remove-input-btn text-red-500 hover:text-red-700 transition duration-150 ease-in-out text-sm">Remove</button>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', inputHtml);
+            };
+
+            // --- EVENT LISTENERS ---
+
+            // Toggle dynamic content and buttons based on project type
+            projectTypeRadios.forEach(radio => {
+                radio.addEventListener('change', (event) => {
+                    const type = event.target.value;
+                    dynamicContentContainer.classList.remove('hidden');
+                    projectDetailsContainer.innerHTML = ''; // Clear all sections
+                    colorPaletteContainer.innerHTML = ''; // Clear color palette
+                    
+                    if (type === 'interior') {
+                        addAssignmentGroupBtn.classList.remove('hidden');
+                        addExteriorSectionBtn.classList.add('hidden');
+                        createColorPaletteEntry();
+                        createInteriorAssignmentGroup(); // Add initial interior group
+                    } else {
+                        addAssignmentGroupBtn.classList.add('hidden');
+                        addExteriorSectionBtn.classList.remove('hidden');
+                        createColorPaletteEntry();
+                        createExteriorSection(); // Add initial exterior section
+                    }
+                });
+            });
+
+            // Add new section buttons event listeners
+            addColorBtn.addEventListener('click', createColorPaletteEntry);
+            addAssignmentGroupBtn.addEventListener('click', createInteriorAssignmentGroup);
+            addExteriorSectionBtn.addEventListener('click', createExteriorSection);
+
+            // Dynamic event delegation for removing elements and managing 'other' field
+            document.addEventListener('click', (event) => {
+                if (event.target.classList.contains('remove-color-btn')) {
+                    event.target.closest('div').remove();
+                    updateColorDropdowns();
+                } else if (event.target.classList.contains('remove-group-btn')) {
+                    event.target.closest('.assignment-group').remove();
+                } else if (event.target.classList.contains('remove-section-btn')) {
+                    event.target.closest('[id^="exterior-"]').remove();
+                } else if (event.target.classList.contains('remove-input-btn')) {
+                    event.target.closest('div').remove();
+                } else if (event.target.id === 'add-bathroom-btn') {
+                    addBathroomInput(document.getElementById('bathroom-inputs-container'));
+                } else if (event.target.id === 'add-bedroom-btn') {
+                    addBedroomInput(document.getElementById('bedroom-inputs-container'));
+                } else if (event.target.id === 'add-hallway-btn') {
+                    addHallwayInput(document.getElementById('hallway-inputs-container'));
+                } else if (event.target.id === 'add-other-room-btn') {
+                    addOtherRoomInput(document.getElementById('other-room-inputs-container'));
+                } else if (event.target.classList.contains('add-accent-wall-btn')) {
+                    addAccentWallInput(event.target.previousElementSibling);
+                } else if (event.target.classList.contains('add-other-btn')) {
+                    addOtherInput(event.target.previousElementSibling);
+                }
+            });
+
+            document.addEventListener('input', (event) => {
+                if (event.target.classList.contains('color-entry-field')) {
+                    updateColorDropdowns();
+                }
+            });
+
+            document.addEventListener('change', (event) => {
+                const target = event.target;
+                const parentContainer = target.closest('.assignment-group') || target.closest('.color-assignment-block');
+
+                if (target.id === 'bathroom-checkbox') {
+                    const bathroomSection = document.getElementById('bathroom-section');
+                    const bathroomInputsContainer = document.getElementById('bathroom-inputs-container');
+                    if (target.checked) {
+                        bathroomSection.classList.remove('hidden');
+                        if (bathroomInputsContainer.childElementCount === 0) {
+                            addBathroomInput(bathroomInputsContainer);
+                        }
+                    } else {
+                        bathroomSection.classList.add('hidden');
+                        bathroomInputsContainer.innerHTML = '';
+                    }
+                } else if (target.id === 'bedroom-checkbox') {
+                    const bedroomSection = document.getElementById('bedroom-section');
+                    const bedroomInputsContainer = document.getElementById('bedroom-inputs-container');
+                    if (target.checked) {
+                        bedroomSection.classList.remove('hidden');
+                        if (bedroomInputsContainer.childElementCount === 0) {
+                            addBedroomInput(bedroomInputsContainer);
+                        }
+                    } else {
+                        bedroomSection.classList.add('hidden');
+                        bedroomInputsContainer.innerHTML = '';
+                    }
+                } else if (target.id === 'hallway-checkbox') {
+                    const hallwaySection = document.getElementById('hallway-section');
+                    const hallwayInputsContainer = document.getElementById('hallway-inputs-container');
+                    if (target.checked) {
+                        hallwaySection.classList.remove('hidden');
+                        if (hallwayInputsContainer.childElementCount === 0) {
+                            addHallwayInput(hallwayInputsContainer);
+                        }
+                    } else {
+                        hallwaySection.classList.add('hidden');
+                        hallwayInputsContainer.innerHTML = '';
+                    }
+                } else if (target.id === 'other-room-checkbox') {
+                    const otherRoomSection = document.getElementById('other-room-section');
+                    const otherRoomInputsContainer = document.getElementById('other-room-inputs-container');
+                    if (target.checked) {
+                        otherRoomSection.classList.remove('hidden');
+                        if (otherRoomInputsContainer.childElementCount === 0) {
+                            addOtherRoomInput(otherRoomInputsContainer);
+                        }
+                    } else {
+                        otherRoomSection.classList.add('hidden');
+                        otherRoomInputsContainer.innerHTML = '';
+                    }
+                } else if (target.classList.contains('accentwall-checkbox')) {
+                    const accentWallSection = parentContainer.querySelector('.accent-wall-section');
+                    const accentWallInputsContainer = parentContainer.querySelector('.accent-wall-inputs-container');
+                    if (target.checked) {
+                        accentWallSection.classList.remove('hidden');
+                        if (accentWallInputsContainer.childElementCount === 0) {
+                            addAccentWallInput(accentWallInputsContainer);
+                        }
+                    } else {
+                        accentWallSection.classList.add('hidden');
+                        accentWallInputsContainer.innerHTML = '';
+                    }
+                } else if (target.classList.contains('other-checkbox')) {
+                    const otherSection = parentContainer.querySelector('.other-section');
+                    const otherInputsContainer = parentContainer.querySelector('.other-inputs-container');
+                    if (target.checked) {
+                        otherSection.classList.remove('hidden');
+                        if (otherInputsContainer.childElementCount === 0) {
+                            addOtherInput(otherInputsContainer);
+                        }
+                    } else {
+                        otherSection.classList.add('hidden');
+                        otherInputsContainer.innerHTML = '';
+                    }
+                } else if (target.classList.contains('color-manufacturer-select')) {
+                    const otherField = target.closest('div').querySelector('.other-manufacturer-field');
+                    if (target.value === 'Other') {
+                        otherField.classList.remove('hidden');
+                    } else {
+                        otherField.classList.add('hidden');
+                    }
+                }
+            });
+
+            // Form submission handler
+            form.addEventListener('submit', async (event) => {
+                event.preventDefault(); // Prevent the default form submission
+                
+                // Show a simple loading state or a message
+                const submitButton = form.querySelector('button[type="submit"]');
+                submitButton.disabled = true;
+                submitButton.textContent = 'Submitting...';
+
+                // Collect data into a structured object
+                const projectData = {};
+                const formData = new FormData(form);
+
+                projectData.client = {
+                    firstName: formData.get('firstName'),
+                    lastName: formData.get('lastName'),
+                    email: formData.get('clientEmail'),
+                    phoneNumber: formData.get('phoneNumber'),
+                    address: {
+                        street: formData.get('street'),
+                        city: formData.get('city'),
+                        state: formData.get('state'),
+                        zipCode: formData.get('zipCode')
+                    }
+                };
+
+                // Add the new project details
+                projectData.jobId = formData.get('jobId');
+                projectData.estimateLink = formData.get('estimateLink');
+                projectData.workOrderLink = formData.get('workOrderLink');
+                projectData.notes = formData.get('notes');
+
+                // Get single project type
+                projectData.projectType = formData.get('projectType');
+
+                projectData.colors = Array.from(colorPaletteContainer.querySelectorAll('.color-entry-field')).map(input => {
+                    const colorId = input.dataset.colorId;
+                    
+                    const manufacturerSelect = input.closest('div').querySelector('.color-manufacturer-select');
+                    let manufacturerValue = manufacturerSelect.value;
+                    if (manufacturerValue === 'Other') {
+                        const otherInput = input.closest('div').querySelector('.other-manufacturer-field input');
+                        manufacturerValue = otherInput.value;
+                    }
+
+                    return {
+                        id: colorId,
+                        name: formData.get(`colorName-${colorId}`),
+                        number: formData.get(`colorNumber-${colorId}`),
+                        manufacturer: manufacturerValue
+                    };
+                });
+                
+                projectData.assignments = [];
+
+                if (projectData.projectType === 'interior') {
+                    const interiorGroups = projectDetailsContainer.querySelectorAll('.assignment-group');
+                    interiorGroups.forEach(group => {
+                        const rooms = Array.from(group.querySelectorAll('.room-checkbox:checked')).map(checkbox => checkbox.value);
+                        
+                        // Add specific bathrooms if the bathroom checkbox is checked
+                        if (rooms.includes('Bathroom')) {
+                            const bathroomNames = Array.from(group.querySelectorAll('.bathroom-name')).map(input => input.value);
+                            rooms.splice(rooms.indexOf('Bathroom'), 1); // Remove generic "Bathroom"
+                            rooms.push(...bathroomNames.filter(name => name.trim() !== ''));
+                        }
+
+                        // Add specific bedrooms if the bedroom checkbox is checked
+                        if (rooms.includes('Bedroom')) {
+                            const bedroomNames = Array.from(group.querySelectorAll('.bedroom-name')).map(input => input.value);
+                            rooms.splice(rooms.indexOf('Bedroom'), 1); // Remove generic "Bedroom"
+                            rooms.push(...bedroomNames.filter(name => name.trim() !== ''));
+                        }
+
+                        // Add specific hallways if the hallway checkbox is checked
+                        if (rooms.includes('Hallway')) {
+                            const hallwayNames = Array.from(group.querySelectorAll('.hallway-name')).map(input => input.value);
+                            rooms.splice(rooms.indexOf('Hallway'), 1); // Remove generic "Hallway"
+                            rooms.push(...hallwayNames.filter(name => name.trim() !== ''));
+                        }
+
+                        // Add specific other rooms if the other room checkbox is checked
+                        if (rooms.includes('Other')) {
+                            const otherRoomNames = Array.from(group.querySelectorAll('.other-room-name')).map(input => input.value);
+                            rooms.splice(rooms.indexOf('Other'), 1); // Remove generic "Other"
+                            rooms.push(...otherRoomNames.filter(name => name.trim() !== ''));
+                        }
+
+                        const colorId = group.querySelector('.color-select').value;
+                        
+                        const areas = [];
+                        const checkedAreaBoxes = Array.from(group.querySelectorAll('.area-checkbox:checked'));
+                        
+                        checkedAreaBoxes.forEach(checkbox => {
+                            if (checkbox.classList.contains('accentwall-checkbox')) {
+                                const accentWalls = Array.from(group.querySelectorAll('.accent-wall-name')).map(input => input.value);
+                                areas.push(...accentWalls);
+                            } else if (checkbox.classList.contains('other-checkbox')) {
+                                const otherItems = Array.from(group.querySelectorAll('.other-name')).map(input => input.value);
+                                areas.push(...otherItems);
+                            } else {
+                                areas.push(checkbox.value);
+                            }
+                        });
+
+
+                        if (rooms.length > 0 && colorId && areas.length > 0) {
+                            projectData.assignments.push({ type: 'interior', rooms, colorId, areas });
+                        }
+                    });
+                } else if (projectData.projectType === 'exterior') {
+                    const exteriorSections = projectDetailsContainer.querySelectorAll('[id^="exterior-"]');
+                    exteriorSections.forEach(section => {
+                        const areaName = section.querySelector('input[name="areaName"]').value;
+                        const colorSelect = section.querySelector('.color-select');
+                        const colorId = colorSelect.value;
+                        const areas = Array.from(section.querySelectorAll('.area-checkbox:checked')).map(checkbox => {
+                            if (checkbox.classList.contains('other-checkbox')) {
+                                return Array.from(section.querySelectorAll('.other-name')).map(input => input.value);
+                            }
+                            return checkbox.value;
+                        });
+
+                        if (areaName && colorId && areas.length > 0) {
+                            projectData.assignments.push({ type: 'exterior', areaName, colorId, areas });
+                        }
+                    });
+                }
+
+                // Append the structured JSON to the form data
+                formData.append("projectData", JSON.stringify(projectData));
+
+                try {
+                    const response = await fetch(GOOGLE_APPS_SCRIPT_URL, {
+                        method: 'POST',
+                        body: formData,
+                        redirect: 'follow',
+                        mode: 'no-cors'
+                    });
+
+                    // Google Apps Script returns an empty response for 'no-cors' mode, so we rely on status.
+                    // A simple, visual message box is best practice here.
+                    const messageBox = document.createElement('div');
+                    messageBox.className = "fixed inset-0 flex items-center justify-center p-4 z-50";
+                    messageBox.innerHTML = `
+                        <div class="absolute inset-0 bg-gray-900 opacity-75"></div>
+                        <div class="bg-white p-8 rounded-lg shadow-2xl max-w-sm mx-auto z-10 text-center">
+                            <h3 class="text-2xl font-bold text-gray-800 mb-2">Form Submitted Successfully!</h3>
+                            <p class="text-gray-600 mb-4">The project details have been saved to your Google Sheet.</p>
+                            <button id="close-modal" class="px-6 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700">Close</button>
+                        </div>
+                    `;
+                    document.body.appendChild(messageBox);
+                    
+                    document.getElementById('close-modal').addEventListener('click', () => {
+                        messageBox.remove();
+                        form.reset(); // Reset form after successful submission
+                    });
+
+                } catch (error) {
+                    // Handle network errors
+                    const networkErrorBox = document.createElement('div');
+                    networkErrorBox.className = "fixed inset-0 flex items-center justify-center p-4 z-50";
+                    networkErrorBox.innerHTML = `
+                        <div class="absolute inset-0 bg-gray-900 opacity-75"></div>
+                        <div class="bg-white p-8 rounded-lg shadow-2xl max-w-sm mx-auto z-10 text-center">
+                            <h3 class="text-2xl font-bold text-red-500 mb-2">Submission Failed!</h3>
+                            <p class="text-gray-600 mb-4">Could not connect. Please check your internet connection or Google Apps Script URL.</p>
+                            <button id="close-network-modal" class="px-6 py-2 bg-red-600 text-white font-medium rounded-lg hover:bg-red-700">Close</button>
+                        </div>
+                    `;
+                    document.body.appendChild(networkErrorBox);
+                    
+                    document.getElementById('close-network-modal').addEventListener('click', () => {
+                        networkErrorBox.remove();
+                    });
+                } finally {
+                    // Restore button state
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Submit Project Details';
+                }
+            });
+            
+            // Call the new function to pre-fill the form on page load
+            prefillFormFromURL();
+        });
+    </script>
+</body>
+</html>
